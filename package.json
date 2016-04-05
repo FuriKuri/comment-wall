@@ -1,0 +1,19 @@
+{
+  "name": "comment-wall",
+  "version": "1.0.0",
+  "description": "Simple web app to post comments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuriKuri/comment-wall.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FuriKuri/comment-wall/issues"
+  },
+  "homepage": "https://github.com/FuriKuri/comment-wall#readme"
+}
