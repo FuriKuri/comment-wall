@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/FuriKuri/comment-wall/issues"
   },
-  "homepage": "https://github.com/FuriKuri/comment-wall#readme"
+  "homepage": "https://github.com/FuriKuri/comment-wall#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
