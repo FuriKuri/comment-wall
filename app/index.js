@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var r = require('rethinkdb');
+var config = require('./config.js');
 
 function createTable(connection, callback) {
   //Create the table if needed.
@@ -72,7 +73,7 @@ function onIoConnection(dbConnection) {
 }
 
 var connection = null;
-r.connect( {host: 'rethinkdb', port: 28015}, function(err, conn) {
+r.connect(config.rethinkdb, function(err, conn) {
   if (err) throw err;
   connection = conn;
   

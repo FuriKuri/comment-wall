@@ -1,0 +1,26 @@
+[Unit]
+Description=Comment Wall Service
+
+Requires=docker.service
+Requires=comment-wall-sk@%i.service
+After=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+User=core
+
+Restart=always
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull furikuri/comment-wall
+ExecStart=/usr/bin/docker run --name %p-%i \
+      -h %H \
+      -p ${COREOS_PUBLIC_IPV4}:3000:3000 \
+      -e INSTANCE=%p-%i \
+      furikuri/comment-wall
+ExecStop=-/usr/bin/docker kill %p-%i
+ExecStop=-/usr/bin/docker rm %p-%i
+
+[X-Fleet]
+Conflicts=comment-wall@*.service
