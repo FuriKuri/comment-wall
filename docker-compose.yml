@@ -1,0 +1,12 @@
+rethinkdb:
+  image: rethinkdb
+  ports:
+   - "8080:8080"
+   - "28015"
+   - "29015"
+comment-wall:
+  build: ./app
+  links:
+    - rethinkdb
+  ports:
+    - "3000:3000"
