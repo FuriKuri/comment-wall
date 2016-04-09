@@ -1,6 +1,6 @@
 var Etcd = require('node-etcd');
 
-var etcdHost = process.env.ETCD_HOST || '172.17.42.1';
+var etcdHost = process.env.ETCD_HOST || '172.17.8.101';
 var etcdPort = process.env.ETCD_PORT || 4001;
 
 console.log('Connecting to etcd on '+etcdHost+':'+etcdPort);

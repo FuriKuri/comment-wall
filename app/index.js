@@ -1,8 +1,21 @@
 var app = require('express')();
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var r = require('rethinkdb');
 var config = require('./config.js');
+
+function createDatabase(connection, config, callback) {
+  //Create the database if needed.
+  r.dbList().contains(config.rethinkdb.db).do(function(containsDb) {
+    return r.branch(
+      containsDb,
+      {created: 0},
+      r.dbCreate(config.rethinkdb.db)
+    );
+  }).run(connection, function(err, result) {
+    callback(err, result);
+  });
+}
 
 function createTable(connection, callback) {
   //Create the table if needed.
@@ -76,15 +89,16 @@ var connection = null;
 r.connect(config.rethinkdb, function(err, conn) {
   if (err) throw err;
   connection = conn;
-  
-  createTable(connection, function(err, result) {
-    if (err) throw err;
-    console.log(JSON.stringify(result, null, 2));
-    createIndex(connection, function(err, result) {
+  createDatabase(connection, config, function(err, result) {
+    createTable(connection, function(err, result) {
       if (err) throw err;
-      http.listen(3000, function(){
-        console.log('listening on *:3000');
-        onIoConnection(connection);
+      console.log(JSON.stringify(result, null, 2));
+      createIndex(connection, function(err, result) {
+        if (err) throw err;
+        http.listen(3000, function(){
+          console.log('listening on *:3000');
+          onIoConnection(connection);
+        });
       });
     });
   });

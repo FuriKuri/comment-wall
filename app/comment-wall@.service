@@ -16,6 +16,7 @@ ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStartPre=/usr/bin/docker pull furikuri/comment-wall
 ExecStart=/usr/bin/docker run --name %p-%i \
       -h %H \
+      -e ETCD_HOST=${COREOS_PUBLIC_IPV4} \
       -p ${COREOS_PUBLIC_IPV4}:3000:3000 \
       -e INSTANCE=%p-%i \
       furikuri/comment-wall
