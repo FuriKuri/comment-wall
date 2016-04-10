@@ -1,2 +1,2 @@
 # comment-wall
-Simple node app to post comments
+Simple node app for CoreOS demo
