@@ -1,5 +1,5 @@
 rethinkdb:
-  image: rethinkdb
+  image: rethinkdb:2.3.0
   ports:
    - "8080:8080"
    - "28015"
@@ -10,3 +10,5 @@ comment-wall:
     - rethinkdb
   ports:
     - "3000:3000"
+  environment:
+    STANDALONE: "true"
