@@ -25,7 +25,7 @@ module.exports = {
     host: rethink,
     port: 28015,
     authKey: '',
-    db: 'demo'
+    db: 'rethink_ex'
   },
   express: {
      port: 3000

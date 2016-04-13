@@ -2,24 +2,41 @@
 <html>
   <head>
     <title>Comment wall</title>
+    <link rel="stylesheet" href="foundation.min.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
+
       function sendMessage() {
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
       }
+
       socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+        $('#messages').prepend($("<div class='row'>").append($("<div class='large-4 medium-4 medium-push-4 columns callout'>").text(msg)));
       });
     </script>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <div>
-      <input id="m" autocomplete="off" /><button onclick="sendMessage()">Send</button>
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>All Comments</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group large-7 medium-7 medium-push-2 columns">
+        <span class="input-group-label">Message</span>
+        <input class="input-group-field" id="m" type="text">
+        <div class="input-group-button">
+          <input type="button" class="button" onclick="sendMessage()" value="Send">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns" id="messages">
+      </div>
     </div>
   </body>
 </html>
