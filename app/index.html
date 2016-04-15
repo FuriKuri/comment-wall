@@ -7,13 +7,11 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
-
       function sendMessage() {
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
       }
-
       socket.on('chat message', function(msg){
         $('#messages').prepend($("<div class='row'>").append($("<div class='large-4 medium-4 medium-push-4 columns callout'>").text(msg)));
       });
