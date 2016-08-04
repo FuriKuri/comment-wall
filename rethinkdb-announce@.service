@@ -8,3 +8,4 @@ ExecStop=/usr/bin/etcdctl rm /services/rethinkdb/rethinkdb-%i
 
 [X-Fleet]
 X-Conflicts=rethinkdb-announce@*.service
+MachineMetadata=role=worker

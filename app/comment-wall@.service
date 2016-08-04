@@ -25,3 +25,4 @@ ExecStop=-/usr/bin/docker rm %p-%i
 
 [X-Fleet]
 Conflicts=comment-wall@*.service
+MachineMetadata=role=worker

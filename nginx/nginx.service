@@ -26,3 +26,4 @@ ExecStop=-/usr/bin/docker rm %p-%i
 
 [X-Fleet]
 Global=true
+MachineMetadata=role=worker
